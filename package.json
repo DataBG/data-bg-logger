@@ -1,0 +1,20 @@
+{
+  "name": "@data-bg/logger",
+  "version": "1.0.0",
+  "description": "SDK provided for front end, including utilities of logging related functions.",
+  "main": "lib/index.js",
+  "repository": "https://github.com/DataBG/youxian-logger.git",
+  "author": "cclintris",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "build": "rm -rf lib/* && babel src/ -d lib/ -x .ts"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.15.7",
+    "@babel/core": "^7.15.5",
+    "@babel/preset-env": "^7.15.6",
+    "@babel/preset-typescript": "^7.15.0",
+    "axios": "^0.21.4"
+  }
+}
