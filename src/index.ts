@@ -1,33 +1,32 @@
-import { IDEF, EEnv } from './model'
-import { envControl } from './utils/index'
+import { IDEF, EEnv } from './model';
+import { updateBaseURL } from './api/axios';
 
 // 環境參數
-let appName: string = ''
-let namespace: string = ''
-let env: EEnv = null
+let appName: string = '';
+let namespace: string = '';
+let env: EEnv = null;
 
 // 環境控制開關
 // 默認線上環境 PROD
-let envSwitch: boolean = false
+let envSwitch: boolean = false;
 
 const init = (def: IDEF): boolean => {
-  appName = def.appName
-  namespace = def.namespace
-  env = def.env
-  envSwitch = env === EEnv.PROD ? false : true
-  envControl(envSwitch)
-  return
-}
+  appName = def.appName;
+  namespace = def.namespace;
+  env = def.env;
+  updateBaseURL(env);
+  return;
+};
 
-const log = () => {}
+const log = () => {};
 
-const info = () => {}
+const info = () => {};
 
-const warn = () => {}
+const warn = () => {};
 
-const error = () => {}
+const error = () => {};
 
-const debug = () => {}
+const debug = () => {};
 
 const Logger = {
   log,
@@ -35,6 +34,6 @@ const Logger = {
   warn,
   error,
   debug,
-}
+};
 
-const query = () => {}
+const query = () => {};

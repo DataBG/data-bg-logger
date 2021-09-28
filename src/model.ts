@@ -13,20 +13,20 @@ export enum EMessageType {
 }
 
 export interface ILogSubmitBody {
-  appName: string
-  userId?: number
-  namespace?: string
-  text: string
+  appName: string;
+  userId?: number;
+  namespace?: string;
+  text: string;
 }
 
 export interface IDEF {
-  appName: string
-  namespace: string
-  env: EEnv
+  appName: string;
+  namespace: string;
+  env: EEnv;
 }
 
 export interface ExceptionResponse {
-  statusCode: number // HttpStatus http状态码
-  msg: string // 异常信息
-  detail: string // 异常详细信息（可以是 JSON 序列化后结果）
+  statusCode: number; // HttpStatus http状态码
+  msg: string; // 异常信息
+  detail: string; // 异常详细信息（可以是 JSON 序列化后结果）
 }
