@@ -1,5 +1,4 @@
-export const consoleGroup = (name, cb) => {
-  console.group(name);
-  cb();
-  console.groupEnd();
-};
+import * as console from './console';
+import * as http from './http';
+
+export { console, http };

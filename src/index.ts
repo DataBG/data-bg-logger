@@ -1,39 +1,45 @@
-import { IDEF, EEnv } from './model';
+import { IDEF, EEnv, EMessageType, ILogSubmitBody } from './model';
 import { updateBaseURL } from './api/axios';
+import { REPORT_URL, QUERY_URL } from './api/config';
+import { http } from './utils/index';
 
 // 環境參數
 let appName: string = '';
 let namespace: string = '';
 let env: EEnv = null;
 
-// 環境控制開關
-// 默認線上環境 PROD
-let envSwitch: boolean = false;
-
-const init = (def: IDEF): boolean => {
+const init = (def: IDEF): void => {
   appName = def.appName;
   namespace = def.namespace;
   env = def.env;
   updateBaseURL(env);
-  return;
 };
 
-const log = () => {};
-
-const info = () => {};
-
-const warn = () => {};
-
-const error = () => {};
-
-const debug = () => {};
-
-const Logger = {
-  log,
-  info,
-  warn,
-  error,
-  debug,
+const log = (logger: ILogSubmitBody) => {
+  http.post(`${REPORT_URL}/${env}/${EMessageType.LOG}`, logger).then(
+    (res) => {
+      console.log('SDK log success ', res);
+    },
+    (err) => {
+      console.log('SDK log failed ', err);
+    }
+  );
 };
 
-const query = () => {};
+// const info = () => {};
+
+// const warn = () => {};
+
+// const error = () => {};
+
+// const debug = () => {};
+
+// const Logger = {
+//   log,
+//   info,
+//   warn,
+//   error,
+//   debug,
+// };
+
+// const query = () => {};
