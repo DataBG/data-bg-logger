@@ -19,9 +19,8 @@ export interface ILogSubmitBody {
   text: string;
 }
 
-export interface IDEF {
+export interface IDef {
   appName: string;
-  namespace: string;
   env: EEnv;
 }
 

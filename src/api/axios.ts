@@ -17,12 +17,13 @@ const instance: AxiosInstance = axios.create(config);
 instance.interceptors.request.use(
   (config) => {
     console.group(`[axios.request] ${config.url}`, () => {
-      console.log(config);
+      // console.log(config);
     });
     return config;
   },
   (err) => {
-    console.error(err);
+    // console.error(err);
+    console.error('interceptors.request.error');
     return err;
   }
 );
@@ -31,12 +32,13 @@ instance.interceptors.response.use(
   (response) => {
     const config = response.config;
     console.group(`[axios.response] ${config.url}`, () => {
-      console.log(response);
+      // console.log(response);
     });
     return response;
   },
   (err) => {
-    console.error(err);
+    // console.error(err);
+    console.error('interceptors.response.error');
     return err;
   }
 );

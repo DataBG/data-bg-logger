@@ -18,7 +18,7 @@ const get = (url: string, params: any) => {
   });
 };
 
-const post = (url: string, params: any) => {
+const post = (url: string, params: any): Promise<any> => {
   return new Promise((resolve, reject) => {
     instance
       .post(url, params)

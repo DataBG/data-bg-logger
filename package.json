@@ -8,13 +8,18 @@
   "license": "MIT",
   "private": false,
   "scripts": {
+    "test": "babel-node src/__tests__/index -x .ts",
     "build": "rm -rf lib/* && babel src/ -d lib/ -x .ts"
   },
   "devDependencies": {
     "@babel/cli": "^7.15.7",
     "@babel/core": "^7.15.5",
+    "@babel/node": "^7.15.4",
     "@babel/preset-env": "^7.15.6",
     "@babel/preset-typescript": "^7.15.0",
+    "@types/axios": "^0.14.0"
+  },
+  "dependencies": {
     "axios": "^0.21.4"
   }
 }

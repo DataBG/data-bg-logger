@@ -1,27 +1,32 @@
-import { IDEF, EEnv, EMessageType, ILogSubmitBody } from './model';
+import { IDef, EEnv, EMessageType, ILogSubmitBody } from './model';
 import { updateBaseURL } from './api/axios';
 import { REPORT_URL, QUERY_URL } from './api/config';
 import { http } from './utils/index';
 
 // 環境參數
-let appName: string = '';
-let namespace: string = '';
-let env: EEnv = null;
+let _def: IDef = { appName: 'DEFAULT_APP_NAME', env: EEnv.TEST };
 
-const init = (def: IDEF): void => {
-  appName = def.appName;
-  namespace = def.namespace;
-  env = def.env;
-  updateBaseURL(env);
+export const init = (def: IDef): void => {
+  console.log('[init] def', def);
+  _def = def;
+  updateBaseURL(def.env);
 };
 
-const log = (logger: ILogSubmitBody) => {
-  http.post(`${REPORT_URL}/${env}/${EMessageType.LOG}`, logger).then(
+export const log = (text: string, namespace?: string) => {
+  const { env, appName } = _def;
+  const body: ILogSubmitBody = {
+    appName,
+    namespace,
+    text,
+  };
+  http.post(`${REPORT_URL}/${env}/${EMessageType.LOG}`, body).then(
     (res) => {
-      console.log('SDK log success ', res);
+      console.log('SDK log success');
+      // console.log('SDK log success ', res);
     },
     (err) => {
-      console.log('SDK log failed ', err);
+      console.log('SDK log failed');
+      // console.log('SDK log failed ', err);
     }
   );
 };
