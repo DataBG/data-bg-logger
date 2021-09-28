@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
+    "moduleResolution": "Node",
     "lib": ["ES6", "DOM"]
   },
   "include": ["src"]

@@ -1,7 +1,7 @@
 import { IDef, EEnv, EMessageType, ILogSubmitBody } from './model';
 import { updateBaseURL } from './api/axios';
 import { REPORT_URL, QUERY_URL } from './api/config';
-import { http } from './utils/index';
+import { http } from './utils';
 
 // 環境參數
 let _def: IDef = { appName: 'DEFAULT_APP_NAME', env: EEnv.TEST };

@@ -1,5 +1,5 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
-import { console } from '../utils/index';
+import { console } from '../utils';
 import { EEnv } from '../model';
 import { BASE_IP, PORT } from './config';
 
