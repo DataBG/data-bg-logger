@@ -1,6 +1,6 @@
 import { init, log } from '..';
 import { EEnv } from '../model';
 
-init({ appName: 'TEST_LOGGER', env: EEnv.TEST });
+init({ appName: 'TEST_LOGGER', env: EEnv.PROD });
 
-log('测试测试', 'src.__tests__');
+log('log测试', 'src.__tests__');

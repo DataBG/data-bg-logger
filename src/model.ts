@@ -29,3 +29,4 @@ export interface ExceptionResponse {
   msg: string; // 异常信息
   detail: string; // 异常详细信息（可以是 JSON 序列化后结果）
 }
+

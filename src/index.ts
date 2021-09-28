@@ -21,7 +21,7 @@ export const log = (text: string, namespace?: string) => {
   };
   http.post(`${REPORT_URL}/${env}/${EMessageType.LOG}`, body).then(
     (res) => {
-      console.log('SDK log success');
+      console.log('SDK log success', res.data);
       // console.log('SDK log success ', res);
     },
     (err) => {
