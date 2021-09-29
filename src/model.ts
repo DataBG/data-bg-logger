@@ -49,3 +49,14 @@ export enum ELock {
   LOCKED = 'LOCKED',
   UNLOCKED = 'UNLOCKED',
 }
+
+export interface IQueryBody {
+  appName?: string;
+  env?: EEnv;
+  type?: EMessageType;
+  userId?: number;
+  namespace?: string;
+  keyword?: string;
+  startTime?: number;
+  endTime?: number;
+}

@@ -6,11 +6,27 @@ import {
   EhttpMethod,
   ILock,
   ELock,
+  IQueryBody,
 } from './model';
 import { updateBaseURL } from './api/instance';
 import { REPORT_URL, QUERY_URL } from './api/config';
 import { httpRequest } from './api/http';
 import { unlock } from './utils/lock';
+import { assertTrue } from './utils/assert';
+
+// Error 報錯消息
+const LOG_ERR_MSG =
+  'Unable to report log! Please initialize logger SDK environment by calling init().';
+const INFO_ERR_MSG =
+  'Unable to report info! Please initialize logger SDK environment by calling init().';
+const WARN_ERR_MSG =
+  'Unable to report warn! Please initialize logger SDK environment by calling init().';
+const ERROR_ERR_MSG =
+  'Unable to report error! Please initialize logger SDK environment by calling init().';
+const DEBUG_ERR_MSG =
+  'Unable to report debug! Please initialize logger SDK environment by calling init().';
+const QUERY_ERR_MSG =
+  'Unable to query log! Please initialize logger SDK environment by calling init().';
 
 // 環境參數
 let _def: IDef = { appName: 'DEFAULT_APP_NAME', env: EEnv.TEST };
@@ -28,11 +44,7 @@ export const init = (def: IDef): void => {
 };
 
 export const log = (text: string, namespace?: string) => {
-  if (_initLock.flag === ELock.LOCKED) {
-    throw new Error(
-      'Unable to report log! Please initialize logger SDK environment by calling init()'
-    );
-  }
+  assertTrue(_initLock.flag, ELock.LOCKED, LOG_ERR_MSG);
   const { env, appName } = _def;
   const body: ILogSubmitBody = {
     appName,
@@ -53,13 +65,93 @@ export const log = (text: string, namespace?: string) => {
   );
 };
 
-// const info = () => {};
+export const info = (text: string, namespace?: string) => {
+  assertTrue(_initLock.flag, ELock.LOCKED, INFO_ERR_MSG);
+  const { env, appName } = _def;
+  const body: ILogSubmitBody = {
+    appName,
+    namespace,
+    text,
+  };
+  httpRequest(
+    `${REPORT_URL}/${env}/${EMessageType.INFO}`,
+    EhttpMethod.POST,
+    body
+  ).then(
+    (res) => {
+      console.log('SDK info success', res.data);
+    },
+    (err) => {
+      console.log('SDK info failed', err);
+    }
+  );
+};
 
-// const warn = () => {};
+export const warn = (text: string, namespace?: string) => {
+  assertTrue(_initLock.flag, ELock.LOCKED, WARN_ERR_MSG);
+  const { env, appName } = _def;
+  const body: ILogSubmitBody = {
+    appName,
+    namespace,
+    text,
+  };
+  httpRequest(
+    `${REPORT_URL}/${env}/${EMessageType.WARN}`,
+    EhttpMethod.POST,
+    body
+  ).then(
+    (res) => {
+      console.log('SDK warn success', res.data);
+    },
+    (err) => {
+      console.log('SDK warn failed', err);
+    }
+  );
+};
 
-// const error = () => {};
+export const error = (text: string, namespace?: string) => {
+  assertTrue(_initLock.flag, ELock.LOCKED, ERROR_ERR_MSG);
+  const { env, appName } = _def;
+  const body: ILogSubmitBody = {
+    appName,
+    namespace,
+    text,
+  };
+  httpRequest(
+    `${REPORT_URL}/${env}/${EMessageType.ERROR}`,
+    EhttpMethod.POST,
+    body
+  ).then(
+    (res) => {
+      console.log('SDK error success', res.data);
+    },
+    (err) => {
+      console.log('SDK error failed', err);
+    }
+  );
+};
 
-// const debug = () => {};
+export const debug = (text: string, namespace?: string) => {
+  assertTrue(_initLock.flag, ELock.LOCKED, DEBUG_ERR_MSG);
+  const { env, appName } = _def;
+  const body: ILogSubmitBody = {
+    appName,
+    namespace,
+    text,
+  };
+  httpRequest(
+    `${REPORT_URL}/${env}/${EMessageType.DEBUG}`,
+    EhttpMethod.POST,
+    body
+  ).then(
+    (res) => {
+      console.log('SDK debug success', res.data);
+    },
+    (err) => {
+      console.log('SDK debug failed', err);
+    }
+  );
+};
 
 // const Logger = {
 //   log,
@@ -69,4 +161,6 @@ export const log = (text: string, namespace?: string) => {
 //   debug,
 // };
 
-// const query = () => {};
+const query = () => {};
+
+const queryAll = () => {};
