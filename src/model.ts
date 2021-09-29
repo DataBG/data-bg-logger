@@ -30,3 +30,22 @@ export interface ExceptionResponse {
   detail: string; // 异常详细信息（可以是 JSON 序列化后结果）
 }
 
+export type ThttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE';
+
+export enum EhttpMethod {
+  GET = 'GET',
+  POST = 'POST',
+  PUT = 'PUT',
+  DELETE = 'DELETE',
+}
+
+export type TLock = 'LOCKED' | 'UNLOCKED';
+
+export interface ILock {
+  flag: TLock;
+}
+
+export enum ELock {
+  LOCKED = 'LOCKED',
+  UNLOCKED = 'UNLOCKED',
+}

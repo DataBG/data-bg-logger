@@ -1,5 +1,5 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
-import { console } from '../utils/index';
+import { Console } from '../utils/console';
 import { EEnv } from '../model';
 import { BASE_IP, PORT } from './config';
 
@@ -16,30 +16,30 @@ export const updateBaseURL = (env: EEnv): void => {
 
 instance.interceptors.request.use(
   (config) => {
-    console.group(`[axios.request] ${config.url}`, () => {
+    Console.Group(`[axios.request] ${config.url}`, () => {
       // console.log(instance.defaults.baseURL);
     });
     return config;
   },
   (err) => {
     // console.error(err);
-    console.error('interceptors.request.error');
-    return err;
+    Console.Err('interceptors.request.error');
+    return Promise.reject(err);
   }
 );
 
 instance.interceptors.response.use(
   (response) => {
     const config = response.config;
-    console.group(`[axios.response] ${config.url}`, () => {
+    Console.Group(`[axios.response] ${config.url}`, () => {
       // console.log(response);
     });
     return response;
   },
   (err) => {
     // console.error(err);
-    console.error('interceptors.response.error');
-    return err;
+    Console.Err('interceptors.response.error');
+    return Promise.reject({ code: err.response.status, ...err.response.data });
   }
 );
 

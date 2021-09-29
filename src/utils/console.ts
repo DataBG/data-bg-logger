@@ -1,13 +1,19 @@
-export const group = (name, cb): void => {
+const Group = (name, cb): void => {
   console.group(name);
   cb();
   console.groupEnd();
 };
 
-export const error = (err): void => {
+const Err = (err): void => {
   console.error(err);
 };
 
-export const log = (log): void => {
+const Log = (log): void => {
   console.log(log);
+};
+
+export const Console = {
+  Group,
+  Err,
+  Log,
 };
