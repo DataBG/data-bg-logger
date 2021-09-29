@@ -7,6 +7,9 @@ import {
   ILock,
   ELock,
   IQueryBody,
+  IQuery,
+  IExceptionResponse,
+  ILogModel,
 } from './model';
 import { updateBaseURL } from './api/instance';
 import { REPORT_URL, QUERY_URL } from './api/config';
@@ -43,7 +46,10 @@ export const init = (def: IDef): void => {
   unlock(_initLock);
 };
 
-export const log = (text: string, namespace?: string) => {
+export const log = (
+  text: string,
+  namespace?: string
+): Promise<ILogModel | IExceptionResponse> => {
   assertTrue(_initLock.flag, ELock.LOCKED, LOG_ERR_MSG);
   const { env, appName } = _def;
   const body: ILogSubmitBody = {
@@ -51,21 +57,33 @@ export const log = (text: string, namespace?: string) => {
     namespace,
     text,
   };
-  httpRequest(
-    `${REPORT_URL}/${env}/${EMessageType.LOG}`,
-    EhttpMethod.POST,
-    body
-  ).then(
-    (res) => {
-      console.log('SDK log success', res.data);
-    },
-    (err) => {
-      console.log('SDK log failed', err);
-    }
-  );
+  return new Promise((resolve, reject) => {
+    httpRequest(
+      `${REPORT_URL}/${env}/${EMessageType.LOG}`,
+      EhttpMethod.POST,
+      body
+    )
+      .then(
+        (res) => {
+          // console.log('SDK log success', res.data);
+          const logRes = res.data;
+          resolve(logRes);
+        },
+        (err) => {
+          // console.log('SDK log failed', err);
+          reject(err);
+        }
+      )
+      .catch((err) => {
+        reject(err);
+      });
+  });
 };
 
-export const info = (text: string, namespace?: string) => {
+export const info = (
+  text: string,
+  namespace?: string
+): Promise<ILogModel | IExceptionResponse> => {
   assertTrue(_initLock.flag, ELock.LOCKED, INFO_ERR_MSG);
   const { env, appName } = _def;
   const body: ILogSubmitBody = {
@@ -73,21 +91,33 @@ export const info = (text: string, namespace?: string) => {
     namespace,
     text,
   };
-  httpRequest(
-    `${REPORT_URL}/${env}/${EMessageType.INFO}`,
-    EhttpMethod.POST,
-    body
-  ).then(
-    (res) => {
-      console.log('SDK info success', res.data);
-    },
-    (err) => {
-      console.log('SDK info failed', err);
-    }
-  );
+  return new Promise((resolve, reject) => {
+    httpRequest(
+      `${REPORT_URL}/${env}/${EMessageType.INFO}`,
+      EhttpMethod.POST,
+      body
+    )
+      .then(
+        (res) => {
+          // console.log('SDK log success', res.data);
+          const infoRes = res.data;
+          resolve(infoRes);
+        },
+        (err) => {
+          // console.log('SDK log failed', err);
+          reject(err);
+        }
+      )
+      .catch((err) => {
+        reject(err);
+      });
+  });
 };
 
-export const warn = (text: string, namespace?: string) => {
+export const warn = (
+  text: string,
+  namespace?: string
+): Promise<ILogModel | IExceptionResponse> => {
   assertTrue(_initLock.flag, ELock.LOCKED, WARN_ERR_MSG);
   const { env, appName } = _def;
   const body: ILogSubmitBody = {
@@ -95,21 +125,33 @@ export const warn = (text: string, namespace?: string) => {
     namespace,
     text,
   };
-  httpRequest(
-    `${REPORT_URL}/${env}/${EMessageType.WARN}`,
-    EhttpMethod.POST,
-    body
-  ).then(
-    (res) => {
-      console.log('SDK warn success', res.data);
-    },
-    (err) => {
-      console.log('SDK warn failed', err);
-    }
-  );
+  return new Promise((resolve, reject) => {
+    httpRequest(
+      `${REPORT_URL}/${env}/${EMessageType.WARN}`,
+      EhttpMethod.POST,
+      body
+    )
+      .then(
+        (res) => {
+          // console.log('SDK log success', res.data);
+          const warnRes = res.data;
+          resolve(warnRes);
+        },
+        (err) => {
+          // console.log('SDK log failed', err);
+          reject(err);
+        }
+      )
+      .catch((err) => {
+        reject(err);
+      });
+  });
 };
 
-export const error = (text: string, namespace?: string) => {
+export const error = (
+  text: string,
+  namespace?: string
+): Promise<ILogModel | IExceptionResponse> => {
   assertTrue(_initLock.flag, ELock.LOCKED, ERROR_ERR_MSG);
   const { env, appName } = _def;
   const body: ILogSubmitBody = {
@@ -117,21 +159,33 @@ export const error = (text: string, namespace?: string) => {
     namespace,
     text,
   };
-  httpRequest(
-    `${REPORT_URL}/${env}/${EMessageType.ERROR}`,
-    EhttpMethod.POST,
-    body
-  ).then(
-    (res) => {
-      console.log('SDK error success', res.data);
-    },
-    (err) => {
-      console.log('SDK error failed', err);
-    }
-  );
+  return new Promise((resolve, reject) => {
+    httpRequest(
+      `${REPORT_URL}/${env}/${EMessageType.ERROR}`,
+      EhttpMethod.POST,
+      body
+    )
+      .then(
+        (res) => {
+          // console.log('SDK log success', res.data);
+          const errorRes = res.data;
+          resolve(errorRes);
+        },
+        (err) => {
+          // console.log('SDK log failed', err);
+          reject(err);
+        }
+      )
+      .catch((err) => {
+        reject(err);
+      });
+  });
 };
 
-export const debug = (text: string, namespace?: string) => {
+export const debug = (
+  text: string,
+  namespace?: string
+): Promise<ILogModel | IExceptionResponse> => {
   assertTrue(_initLock.flag, ELock.LOCKED, DEBUG_ERR_MSG);
   const { env, appName } = _def;
   const body: ILogSubmitBody = {
@@ -139,28 +193,86 @@ export const debug = (text: string, namespace?: string) => {
     namespace,
     text,
   };
-  httpRequest(
-    `${REPORT_URL}/${env}/${EMessageType.DEBUG}`,
-    EhttpMethod.POST,
-    body
-  ).then(
-    (res) => {
-      console.log('SDK debug success', res.data);
-    },
-    (err) => {
-      console.log('SDK debug failed', err);
-    }
-  );
+  return new Promise((resolve, reject) => {
+    httpRequest(
+      `${REPORT_URL}/${env}/${EMessageType.DEBUG}`,
+      EhttpMethod.POST,
+      body
+    )
+      .then(
+        (res) => {
+          // console.log('SDK log success', res.data);
+          const debugRes = res.data;
+          resolve(debugRes);
+        },
+        (err) => {
+          // console.log('SDK log failed', err);
+          reject(err);
+        }
+      )
+      .catch((err) => {
+        reject(err);
+      });
+  });
 };
 
-// const Logger = {
-//   log,
-//   info,
-//   warn,
-//   error,
-//   debug,
-// };
+export const query = (
+  param: IQuery
+): Promise<ILogModel | IExceptionResponse> => {
+  assertTrue(_initLock.flag, ELock.LOCKED, QUERY_ERR_MSG);
+  const { env, appName } = _def;
+  const params: IQueryBody = {
+    appName,
+    env,
+    ...param,
+  };
+  return new Promise((resolve, reject) => {
+    httpRequest(`${QUERY_URL}`, EhttpMethod.GET, null, params)
+      .then(
+        (res) => {
+          // console.log('SDK query success', res.data);
+          const queryRes = res.data;
+          resolve(queryRes);
+        },
+        (err) => {
+          // console.log('SDK query failed', err);
+          reject(err);
+        }
+      )
+      .catch((err) => {
+        reject(err);
+      });
+  });
+};
 
-const query = () => {};
+export const queryAll = () => {
+  assertTrue(_initLock.flag, ELock.LOCKED, QUERY_ERR_MSG);
+  return new Promise((resolve, reject) => {
+    httpRequest(`${QUERY_URL}/all`, EhttpMethod.GET)
+      .then(
+        (res) => {
+          // console.log('SDK queryAll success', res.data);
+          const queryAllRes = res.data;
+          resolve(queryAllRes);
+        },
+        (err) => {
+          // console.log('SDK queryAll failed', err);
+          reject(err);
+        }
+      )
+      .catch((err) => {
+        reject(err);
+      });
+  });
+};
 
-const queryAll = () => {};
+export const Logger = {
+  init,
+  log,
+  info,
+  warn,
+  error,
+  debug,
+  query,
+  queryAll,
+};

@@ -2,9 +2,10 @@ import instance from './instance';
 import { ThttpMethod } from '../model';
 
 export const httpRequest = (
-  path: string,
+  url: string,
   method: ThttpMethod,
+  data?: any,
   params?: any
 ) => {
-  return instance(path, { method, data: params });
+  return instance(url, { method, data, params });
 };

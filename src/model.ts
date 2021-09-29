@@ -19,12 +19,24 @@ export interface ILogSubmitBody {
   text: string;
 }
 
+export interface ILogModel {
+  id: number;
+  appName: string;
+  env: EEnv;
+  type: EMessageType;
+  userId: number;
+  namespace: string;
+  text: string;
+  createTime: number;
+  lastModifiedTime: number;
+}
+
 export interface IDef {
   appName: string;
   env: EEnv;
 }
 
-export interface ExceptionResponse {
+export interface IExceptionResponse {
   statusCode: number; // HttpStatus http状态码
   msg: string; // 异常信息
   detail: string; // 异常详细信息（可以是 JSON 序列化后结果）
@@ -53,6 +65,15 @@ export enum ELock {
 export interface IQueryBody {
   appName?: string;
   env?: EEnv;
+  type?: EMessageType;
+  userId?: number;
+  namespace?: string;
+  keyword?: string;
+  startTime?: number;
+  endTime?: number;
+}
+
+export interface IQuery {
   type?: EMessageType;
   userId?: number;
   namespace?: string;
