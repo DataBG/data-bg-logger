@@ -15,7 +15,7 @@ import { updateBaseURL } from './api/instance';
 import { REPORT_URL, QUERY_URL } from './api/config';
 import { httpRequest } from './api/http';
 import { unlock } from './utils/lock';
-import { assertTrue } from './utils/assert';
+import { assertEqual } from './utils/assert';
 import { LOG_ERR_MSG, INFO_ERR_MSG, WARN_ERR_MSG, ERROR_ERR_MSG, DEBUG_ERR_MSG, QUERY_ERR_MSG } from './constant/text';
 
 // 環境參數
@@ -34,7 +34,7 @@ export const init = (def: IDef): void => {
 };
 
 export const log = (text: string, namespace?: string): Promise<ILogModel | IExceptionResponse> => {
-  assertTrue(_initLock.flag, ELock.LOCKED, LOG_ERR_MSG);
+  assertEqual(_initLock.flag, ELock.LOCKED, LOG_ERR_MSG);
   const { env, appName } = _def;
   const body: ILogSubmitBody = {
     appName,
@@ -45,7 +45,7 @@ export const log = (text: string, namespace?: string): Promise<ILogModel | IExce
 };
 
 export const info = (text: string, namespace?: string): Promise<ILogModel | IExceptionResponse> => {
-  assertTrue(_initLock.flag, ELock.LOCKED, INFO_ERR_MSG);
+  assertEqual(_initLock.flag, ELock.LOCKED, INFO_ERR_MSG);
   const { env, appName } = _def;
   const body: ILogSubmitBody = {
     appName,
@@ -56,7 +56,7 @@ export const info = (text: string, namespace?: string): Promise<ILogModel | IExc
 };
 
 export const warn = (text: string, namespace?: string): Promise<ILogModel | IExceptionResponse> => {
-  assertTrue(_initLock.flag, ELock.LOCKED, WARN_ERR_MSG);
+  assertEqual(_initLock.flag, ELock.LOCKED, WARN_ERR_MSG);
   const { env, appName } = _def;
   const body: ILogSubmitBody = {
     appName,
@@ -67,7 +67,7 @@ export const warn = (text: string, namespace?: string): Promise<ILogModel | IExc
 };
 
 export const error = (text: string, namespace?: string): Promise<ILogModel | IExceptionResponse> => {
-  assertTrue(_initLock.flag, ELock.LOCKED, ERROR_ERR_MSG);
+  assertEqual(_initLock.flag, ELock.LOCKED, ERROR_ERR_MSG);
   const { env, appName } = _def;
   const body: ILogSubmitBody = {
     appName,
@@ -78,7 +78,7 @@ export const error = (text: string, namespace?: string): Promise<ILogModel | IEx
 };
 
 export const debug = (text: string, namespace?: string): Promise<ILogModel | IExceptionResponse> => {
-  assertTrue(_initLock.flag, ELock.LOCKED, DEBUG_ERR_MSG);
+  assertEqual(_initLock.flag, ELock.LOCKED, DEBUG_ERR_MSG);
   const { env, appName } = _def;
   const body: ILogSubmitBody = {
     appName,
@@ -89,7 +89,7 @@ export const debug = (text: string, namespace?: string): Promise<ILogModel | IEx
 };
 
 export const query = (param: IQuery): Promise<ILogModel | IExceptionResponse> => {
-  assertTrue(_initLock.flag, ELock.LOCKED, QUERY_ERR_MSG);
+  assertEqual(_initLock.flag, ELock.LOCKED, QUERY_ERR_MSG);
   const { env, appName } = _def;
   const params: IQueryBody = {
     appName,
@@ -100,7 +100,7 @@ export const query = (param: IQuery): Promise<ILogModel | IExceptionResponse> =>
 };
 
 export const queryAll = () => {
-  assertTrue(_initLock.flag, ELock.LOCKED, QUERY_ERR_MSG);
+  assertEqual(_initLock.flag, ELock.LOCKED, QUERY_ERR_MSG);
   return httpRequest(`${QUERY_URL}/all`, EHttpMethod.GET);
 };
 

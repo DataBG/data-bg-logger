@@ -5,3 +5,7 @@ export const WARN_ERR_MSG = 'Unable to report warn! Please initialize logger SDK
 export const ERROR_ERR_MSG = 'Unable to report error! Please initialize logger SDK environment by calling init().';
 export const DEBUG_ERR_MSG = 'Unable to report debug! Please initialize logger SDK environment by calling init().';
 export const QUERY_ERR_MSG = 'Unable to query log! Please initialize logger SDK environment by calling init().';
+
+// Assert 報錯消息
+export const ASSERT_TRUE_MSG = 'Assertion Error: assert true unexpected!';
+export const ASSERT_EQUAL_MSG = 'Assertion Error: assert equal unexpected!';

@@ -1,19 +1,19 @@
-export const assertTrue = (
-  condition1: any,
-  condition2: any,
-  errMsg: string
-): void => {
-  if (condition1 === condition2) {
+import { ASSERT_EQUAL_MSG, ASSERT_TRUE_MSG } from '../constant/text';
+
+export const assertTrue = (condition: any, errMsg?: string): void => {
+  if (condition) {
+    if (!errMsg) {
+      throw new Error(ASSERT_TRUE_MSG);
+    }
     throw new Error(errMsg);
   }
 };
 
-export const assertFalse = (
-  condition1: any,
-  condition2: any,
-  errMsg: string
-): void => {
-  if (condition1 !== condition2) {
+export const assertEqual = (condition: any, expected: any, errMsg?: string): void => {
+  if (condition === expected) {
+    if (!errMsg) {
+      throw new Error(ASSERT_EQUAL_MSG);
+    }
     throw new Error(errMsg);
   }
 };
