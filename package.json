@@ -1,6 +1,6 @@
 {
   "name": "@data-bg/logger",
-  "version": "0.0.5-alpha.0",
+  "version": "0.0.5-alpha.1",
   "description": "SDK provided for front end, including utilities of logging related functions.",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
