@@ -52,9 +52,7 @@ export const info = (text: string, namespace?: string): Promise<ILogModel | IExc
     namespace,
     text,
   };
-  return httpRequest(`${REPORT_URL}/${env}/${EMessageType.INFO}`, EhttpMethod.POST, body).then((res) => {
-    return res.data;
-  });
+  return httpRequest(`${REPORT_URL}/${env}/${EMessageType.INFO}`, EhttpMethod.POST, body);
 };
 
 export const warn = (text: string, namespace?: string): Promise<ILogModel | IExceptionResponse> => {
@@ -65,9 +63,7 @@ export const warn = (text: string, namespace?: string): Promise<ILogModel | IExc
     namespace,
     text,
   };
-  return httpRequest(`${REPORT_URL}/${env}/${EMessageType.WARN}`, EhttpMethod.POST, body).then((res) => {
-    return res.data;
-  });
+  return httpRequest(`${REPORT_URL}/${env}/${EMessageType.WARN}`, EhttpMethod.POST, body);
 };
 
 export const error = (text: string, namespace?: string): Promise<ILogModel | IExceptionResponse> => {
@@ -78,9 +74,7 @@ export const error = (text: string, namespace?: string): Promise<ILogModel | IEx
     namespace,
     text,
   };
-  return httpRequest(`${REPORT_URL}/${env}/${EMessageType.ERROR}`, EhttpMethod.POST, body).then((res) => {
-    return res.data;
-  });
+  return httpRequest(`${REPORT_URL}/${env}/${EMessageType.ERROR}`, EhttpMethod.POST, body);
 };
 
 export const debug = (text: string, namespace?: string): Promise<ILogModel | IExceptionResponse> => {
@@ -91,9 +85,7 @@ export const debug = (text: string, namespace?: string): Promise<ILogModel | IEx
     namespace,
     text,
   };
-  return httpRequest(`${REPORT_URL}/${env}/${EMessageType.DEBUG}`, EhttpMethod.POST, body).then((res) => {
-    return res.data;
-  });
+  return httpRequest(`${REPORT_URL}/${env}/${EMessageType.DEBUG}`, EhttpMethod.POST, body);
 };
 
 export const query = (param: IQuery): Promise<ILogModel | IExceptionResponse> => {
@@ -104,16 +96,12 @@ export const query = (param: IQuery): Promise<ILogModel | IExceptionResponse> =>
     env,
     ...param,
   };
-  return httpRequest(`${QUERY_URL}`, EhttpMethod.GET, null, params).then((res) => {
-    return res.data;
-  });
+  return httpRequest(`${QUERY_URL}`, EhttpMethod.GET, null, params);
 };
 
 export const queryAll = () => {
   assertTrue(_initLock.flag, ELock.LOCKED, QUERY_ERR_MSG);
-  return httpRequest(`${QUERY_URL}/all`, EhttpMethod.GET).then((res) => {
-    return res.data;
-  });
+  return httpRequest(`${QUERY_URL}/all`, EhttpMethod.GET);
 };
 
 export const Logger = {
