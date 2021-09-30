@@ -1,6 +1,6 @@
 import instance from './instance';
-import { ThttpMethod } from '../model';
+import { EHttpMethod } from '../model';
 
-export const httpRequest = (url: string, method: ThttpMethod, data?: any, params?: any) => {
+export const httpRequest = (url: string, method: EHttpMethod, data?: any, params?: any) => {
   return instance(url, { method, data, params }).then((res) => res.data);
 };
