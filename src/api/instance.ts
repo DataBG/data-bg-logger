@@ -1,7 +1,7 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
-import { Console } from '../utils/console';
 import { EEnv } from '../model';
 import { BASE_IP, PORT } from './config';
+import { debugConsole } from '../utils/debug';
 
 let config: AxiosRequestConfig = {
   withCredentials: true,
@@ -16,14 +16,11 @@ export const updateBaseURL = (env: EEnv): void => {
 
 instance.interceptors.request.use(
   (config) => {
-    Console.group(`[axios.request] ${config.url}`, () => {
-      // console.log(instance.defaults.baseURL);
-    });
+    debugConsole(`[axios.request] ${config.url}`);
     return config;
   },
   (err) => {
-    // console.error(err);
-    Console.err('interceptors.request.error');
+    debugConsole('interceptors.request.error');
     return Promise.reject(err);
   }
 );
@@ -31,14 +28,11 @@ instance.interceptors.request.use(
 instance.interceptors.response.use(
   (response) => {
     const config = response.config;
-    Console.group(`[axios.response] ${config.url}`, () => {
-      // console.log(response);
-    });
+    debugConsole(`[axios.response] ${config.url}`);
     return response;
   },
   (err) => {
-    // console.error(err);
-    Console.err('interceptors.response.error');
+    debugConsole('interceptors.response.error');
     return Promise.reject({ code: err.response.status, ...err.response.data });
   }
 );

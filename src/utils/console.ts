@@ -1,4 +1,4 @@
-const group = (name, cb): void => {
+const group = (name: string, cb: () => void): void => {
   console.group(name);
   cb();
   console.groupEnd();

@@ -1,6 +1,6 @@
 {
   "name": "@data-bg/logger",
-  "version": "1.0.0",
+  "version": "0.0.3-alpha.0",
   "description": "SDK provided for front end, including utilities of logging related functions.",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -10,7 +10,8 @@
   "private": false,
   "scripts": {
     "test": "babel-node src/__tests__/index -x .ts",
-    "build": "rm -rf lib/* && babel src/ -d lib/ -x .ts && tsc"
+    "build": "rm -rf lib/* && babel src/ -d lib/ -x .ts && tsc",
+    "debug": "DEBUG=DEBUG babel-node src/__tests__/index -x .ts"
   },
   "devDependencies": {
     "@babel/cli": "^7.15.7",
@@ -22,6 +23,7 @@
     "typescript": "^4.4.3"
   },
   "dependencies": {
-    "axios": "^0.21.4"
+    "axios": "^0.21.4",
+    "debug": "^4.3.2"
   }
 }

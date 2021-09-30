@@ -17,6 +17,7 @@ import { httpRequest } from './api/http';
 import { unlock } from './utils/lock';
 import { assertEqual } from './utils/assert';
 import { LOG_ERR_MSG, INFO_ERR_MSG, WARN_ERR_MSG, ERROR_ERR_MSG, DEBUG_ERR_MSG, QUERY_ERR_MSG } from './constant/text';
+import { debugConsole } from './utils/debug';
 
 // 環境參數
 let _def: IDef = { appName: 'DEFAULT_APP_NAME', env: EEnv.TEST };
@@ -27,7 +28,7 @@ let _initLock: ILock = {
 };
 
 export const init = (def: IDef): void => {
-  console.log('[init] def', def);
+  debugConsole('[init] def', def);
   _def = def;
   updateBaseURL(def.env);
   unlock(_initLock);
