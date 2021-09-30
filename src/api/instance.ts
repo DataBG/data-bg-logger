@@ -16,14 +16,14 @@ export const updateBaseURL = (env: EEnv): void => {
 
 instance.interceptors.request.use(
   (config) => {
-    Console.Group(`[axios.request] ${config.url}`, () => {
+    Console.group(`[axios.request] ${config.url}`, () => {
       // console.log(instance.defaults.baseURL);
     });
     return config;
   },
   (err) => {
     // console.error(err);
-    Console.Err('interceptors.request.error');
+    Console.err('interceptors.request.error');
     return Promise.reject(err);
   }
 );
@@ -31,14 +31,14 @@ instance.interceptors.request.use(
 instance.interceptors.response.use(
   (response) => {
     const config = response.config;
-    Console.Group(`[axios.response] ${config.url}`, () => {
+    Console.group(`[axios.response] ${config.url}`, () => {
       // console.log(response);
     });
     return response;
   },
   (err) => {
     // console.error(err);
-    Console.Err('interceptors.response.error');
+    Console.err('interceptors.response.error');
     return Promise.reject({ code: err.response.status, ...err.response.data });
   }
 );
