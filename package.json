@@ -9,7 +9,8 @@
   "private": false,
   "scripts": {
     "test": "babel-node src/__tests__/index -x .ts",
-    "build": "rm -rf lib/* && babel src/ -d lib/ -x .ts"
+    "build": "rm -rf lib/* && babel src/ -d lib/ -x .ts",
+    "debug": "DEBUG=DEBUG babel-node src/__tests__/index -x .ts"
   },
   "devDependencies": {
     "@babel/cli": "^7.15.7",
@@ -20,6 +21,7 @@
     "@types/axios": "^0.14.0"
   },
   "dependencies": {
-    "axios": "^0.21.4"
+    "axios": "^0.21.4",
+    "debug": "^4.3.2"
   }
 }
