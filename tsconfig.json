@@ -2,7 +2,11 @@
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
     "moduleResolution": "Node",
-    "lib": ["ES6", "DOM"]
+    "lib": ["ES6", "DOM"],
+    "declaration": true,
+    "declarationDir": "lib",
+    "emitDeclarationOnly": true
   },
-  "include": ["src"]
+  "include": ["src"],
+  "exclude": ["**/__tests__/"]
 }
