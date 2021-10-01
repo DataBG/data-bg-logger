@@ -100,7 +100,7 @@ export const query = (param: IQuery): Promise<ILogModel | IExceptionResponse> =>
   return httpRequest(`${QUERY_URL}`, EHttpMethod.GET, null, params);
 };
 
-export const queryAll = () => {
+export const queryAll = (): Promise<ILogModel | IExceptionResponse> => {
   assertEqual(_initLock.flag, ELock.LOCKED, QUERY_ERR_MSG);
   return httpRequest(`${QUERY_URL}/all`, EHttpMethod.GET);
 };
