@@ -1,13 +1,13 @@
 import { init, log, info, query, queryAll } from '..';
 import { EEnv, EMessageType, IQuery } from '../model';
 
-init({ appName: 'TEST_LOGGER', env: EEnv.PROD });
+// init({ appName: 'TEST_LOGGER', env: EEnv.PROD });
 
-const logRes = log('log测试', 'src.__tests__');
-logRes.then((res) => console.log('log', res));
+// const logRes = log('log测试', 'src.__tests__');
+// logRes.then((res) => console.log('log', res));
 
-const infoRes = info('info测试', 'src.__tests__');
-infoRes.then((res) => console.log('info', res));
+// const infoRes = info('info测试', 'src.__tests__');
+// infoRes.then((res) => console.log('info', res));
 
 // init({ appName: 'sampleAppName', env: EEnv.PROD });
 
@@ -17,8 +17,8 @@ infoRes.then((res) => console.log('info', res));
 //   keyword: 'blablabla',
 // };
 
-// query(queryAllParam);
+// query(queryAllParam).then((res) => console.log(res));
 
 // init({ appName: 'sampleAppName', env: EEnv.PROD });
 
-// queryAll();
+// queryAll().then((res) => console.log(res));
