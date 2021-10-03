@@ -50,7 +50,7 @@ export enum EHttpMethod {
 }
 
 export interface ILock {
-  flag: ELock,
+  flag: ELock;
 }
 
 export enum ELock {

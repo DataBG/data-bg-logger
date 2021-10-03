@@ -14,13 +14,14 @@ import {
 import { updateBaseURL } from './api/instance';
 import { REPORT_URL, QUERY_URL } from './api/config';
 import { httpRequest } from './api/http';
-import { unlock } from './utils/lock';
+import { lock, unlock } from './utils/lock';
 import { assertEqual } from './utils/assert';
 import { LOG_ERR_MSG, INFO_ERR_MSG, WARN_ERR_MSG, ERROR_ERR_MSG, DEBUG_ERR_MSG, QUERY_ERR_MSG } from './constant/text';
+import { DEFAULT_DEF } from './constant/env';
 import { debugConsole } from './utils/debug';
 
 // 環境參數
-let _def: IDef = { appName: 'DEFAULT_APP_NAME', env: EEnv.TEST };
+let _def: IDef = DEFAULT_DEF;
 
 // 初始化鎖
 let _initLock: ILock = {
@@ -28,10 +29,16 @@ let _initLock: ILock = {
 };
 
 export const init = (def: IDef): void => {
-  debugConsole('[init] def', def);
+  debugConsole('[init] Logger SDK environment', def);
   _def = def;
   updateBaseURL(def.env);
   unlock(_initLock);
+};
+
+export const destroy = (): void => {
+  debugConsole('[destroy] Logger SDK environment');
+  _def = DEFAULT_DEF;
+  lock(_initLock);
 };
 
 export const log = (text: string, namespace?: string): Promise<ILogModel | IExceptionResponse> => {
@@ -107,6 +114,7 @@ export const queryAll = (): Promise<ILogModel | IExceptionResponse> => {
 
 export const Logger = {
   init,
+  destroy,
   log,
   info,
   warn,
