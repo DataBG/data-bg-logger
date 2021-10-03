@@ -1,36 +1,7 @@
 import { init, destroy, log, info, warn, error, debug } from '../index';
 import { IDef, EEnv, EMessageType, ILogModel } from '../model';
 
-declare global {
-  namespace jest {
-    interface Matchers<R> {
-      toBeValidLog(msgType: EMessageType): R;
-    }
-  }
-}
-
-expect.extend({
-  toBeValidLog(received: ILogModel, msgType: EMessageType) {
-    const { appName, env, type, namespace, text } = received;
-    const pass =
-      appName === LoggerTest.appName &&
-      env === _def.env &&
-      namespace === LoggerTest.namespace &&
-      type === msgType &&
-      text === LoggerTest[msgType];
-    if (pass) {
-      return {
-        pass: true,
-        message: () => `Message type ${msgType} passed!`,
-      };
-    } else {
-      return {
-        pass: false,
-        message: () => `Message type ${msgType} failed!`,
-      };
-    }
-  },
-});
+import './logger-matcher';
 
 const LoggerTest = {
   LOG: 'log测试',
