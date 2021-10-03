@@ -29,18 +29,12 @@ expect.extend({
       namespace === LoggerTest.namespace &&
       type === msgType &&
       text === LoggerTest[msgType];
-    if (pass) {
-      return {
-        pass: true,
-        message: () => `Message type ${msgType} passed!`,
-      };
-    } else {
-      return {
-        pass: false,
-        message: () => `Message type ${msgType} failed!`,
-      };
-    }
+
+    return {
+      pass,
+      message: () => `Message type ${msgType} ${pass ? 'passed' : 'failed'}!`,
+    };
   },
 });
 
-export {};
+export { LoggerTest, _def };
