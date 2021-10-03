@@ -1,17 +1,13 @@
 import { init, destroy, log, info, warn, error, debug } from '../index';
 import { IDef, EEnv, EMessageType, ILogModel } from '../model';
 
-const LoggerTest = {
-  LOG: 'log测试',
-  INFO: 'info测试',
-  WARN: 'warn测试',
-  ERROR: 'error测试',
-  DEBUG: 'debug测试',
-  namespace: 'src.__tests__',
-  appName: 'TEST_LOGGER',
-};
-
-const _def: IDef = { appName: LoggerTest.appName, env: EEnv.PROD };
+declare global {
+  namespace jest {
+    interface Matchers<R> {
+      toBeValidLog(msgType: EMessageType): R;
+    }
+  }
+}
 
 expect.extend({
   toBeValidLog(received: ILogModel, msgType: EMessageType) {
@@ -35,6 +31,18 @@ expect.extend({
     }
   },
 });
+
+const LoggerTest = {
+  LOG: 'log测试',
+  INFO: 'info测试',
+  WARN: 'warn测试',
+  ERROR: 'error测试',
+  DEBUG: 'debug测试',
+  namespace: 'src.__tests__',
+  appName: 'TEST_LOGGER',
+};
+
+const _def: IDef = { appName: LoggerTest.appName, env: EEnv.PROD };
 
 describe('Test Logger with correct init', () => {
   beforeAll(() => {
@@ -82,15 +90,15 @@ describe('Test Logger with correct init', () => {
   });
 
   test('Test error api', async () => {
-    const res: any = await warn(LoggerTest.ERROR, LoggerTest.namespace);
+    const res: any = await error(LoggerTest.ERROR, LoggerTest.namespace);
     expect(res).not.toBeNull();
 
     const { appName, env, type, namespace, text } = res;
     expect(appName).toBe(LoggerTest.appName);
     expect(env).toBe(_def.env);
     expect(namespace).toBe(LoggerTest.namespace);
-    expect(type).toBe(EMessageType.WARN);
-    expect(text).toBe(LoggerTest.WARN);
+    expect(type).toBe(EMessageType.ERROR);
+    expect(text).toBe(LoggerTest.ERROR);
   });
 
   test('Test debug api', async () => {
