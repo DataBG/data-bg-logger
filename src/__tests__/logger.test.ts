@@ -1,12 +1,12 @@
 import { init, destroy, log, info, warn, error, debug } from '../index';
 import { EMessageType } from '../model';
 
-import './matcher/logger-matcher';
-import { _def, LoggerTest } from './constant/logger';
+import './custom-matcher';
+import { logger_def, LoggerTest } from './constant/logger';
 
 describe('Test Logger with correct init', () => {
   beforeAll(() => {
-    init(_def);
+    init(logger_def);
   });
 
   afterAll(() => {

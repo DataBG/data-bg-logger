@@ -10,4 +10,4 @@ export const LoggerTest = {
   appName: 'TEST_LOGGER',
 };
 
-export const _def: IDef = { appName: LoggerTest.appName, env: EEnv.PROD };
+export const logger_def: IDef = { appName: LoggerTest.appName, env: EEnv.PROD };

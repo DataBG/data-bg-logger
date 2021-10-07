@@ -9,16 +9,16 @@ import { EEnv, EMessageType, IQuery } from '../model';
 // const infoRes = info('info测试', 'src.__tests__');
 // infoRes.then((res) => console.log('info', res));
 
-// init({ appName: 'sampleAppName', env: EEnv.PROD });
+// init({ appName: 'TEST_LOGGER', env: EEnv.PROD });
 
 // const queryAllParam: IQuery = {
-//   type: EMessageType.ERROR,
-//   namespace: 'sampleNamespace',
-//   keyword: 'blablabla',
+// //   type: EMessageType.ERROR,
+// //   namespace: 'sampleNamespace',
+// //   keyword: 'blablabla',
 // };
 
 // query(queryAllParam).then((res) => console.log(res));
 
-// init({ appName: 'sampleAppName', env: EEnv.PROD });
+// init({ appName: 'TEST_LOGGER', env: EEnv.PROD });
 
 // queryAll().then((res) => console.log(res));
