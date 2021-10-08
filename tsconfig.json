@@ -1,16 +1,12 @@
 {
-    "compilerOptions": {
-        "allowSyntheticDefaultImports": true,
-        "moduleResolution": "Node",
-        "lib": [
-            "ES6",
-            "DOM"
-        ],
-        "declaration": true,
-        "declarationDir": "lib",
-        "emitDeclarationOnly": true,
-    },
-    "include": [
-        "src"
-    ]
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "Node",
+    "lib": ["ES6", "DOM"],
+    "declaration": true,
+    "declarationDir": "lib",
+    "emitDeclarationOnly": true
+  },
+  "include": ["src"],
+  "exclude": ["src/**/__tests__/**"]
 }
