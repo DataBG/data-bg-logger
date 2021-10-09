@@ -42,7 +42,7 @@ export const destroy = (): void => {
 };
 
 // TODO: Promise<T> T 应该是正常返回的数据类型，也就是 then 方法的参数；抛出异常时的 err 的类型需要透过其他方式声明
-export const log = (text: string, namespace?: string): Promise<ILogModel | IExceptionResponse> => {
+export const log = (text: string, namespace?: string): Promise<ILogModel> => {
   assertEqual(_initLock.flag, ELock.LOCKED, LOG_ERR_MSG);
   const { env, appName } = _def;
   const body: ILogSubmitBody = {
@@ -53,7 +53,7 @@ export const log = (text: string, namespace?: string): Promise<ILogModel | IExce
   return httpRequest(`${REPORT_URL}/${env}/${EMessageType.LOG}`, EHttpMethod.POST, body);
 };
 
-export const info = (text: string, namespace?: string): Promise<ILogModel | IExceptionResponse> => {
+export const info = (text: string, namespace?: string): Promise<ILogModel> => {
   assertEqual(_initLock.flag, ELock.LOCKED, INFO_ERR_MSG);
   const { env, appName } = _def;
   const body: ILogSubmitBody = {
@@ -64,7 +64,7 @@ export const info = (text: string, namespace?: string): Promise<ILogModel | IExc
   return httpRequest(`${REPORT_URL}/${env}/${EMessageType.INFO}`, EHttpMethod.POST, body);
 };
 
-export const warn = (text: string, namespace?: string): Promise<ILogModel | IExceptionResponse> => {
+export const warn = (text: string, namespace?: string): Promise<ILogModel> => {
   assertEqual(_initLock.flag, ELock.LOCKED, WARN_ERR_MSG);
   const { env, appName } = _def;
   const body: ILogSubmitBody = {
@@ -75,7 +75,7 @@ export const warn = (text: string, namespace?: string): Promise<ILogModel | IExc
   return httpRequest(`${REPORT_URL}/${env}/${EMessageType.WARN}`, EHttpMethod.POST, body);
 };
 
-export const error = (text: string, namespace?: string): Promise<ILogModel | IExceptionResponse> => {
+export const error = (text: string, namespace?: string): Promise<ILogModel> => {
   assertEqual(_initLock.flag, ELock.LOCKED, ERROR_ERR_MSG);
   const { env, appName } = _def;
   const body: ILogSubmitBody = {
@@ -86,7 +86,7 @@ export const error = (text: string, namespace?: string): Promise<ILogModel | IEx
   return httpRequest(`${REPORT_URL}/${env}/${EMessageType.ERROR}`, EHttpMethod.POST, body);
 };
 
-export const debug = (text: string, namespace?: string): Promise<ILogModel | IExceptionResponse> => {
+export const debug = (text: string, namespace?: string): Promise<ILogModel> => {
   assertEqual(_initLock.flag, ELock.LOCKED, DEBUG_ERR_MSG);
   const { env, appName } = _def;
   const body: ILogSubmitBody = {
@@ -97,7 +97,7 @@ export const debug = (text: string, namespace?: string): Promise<ILogModel | IEx
   return httpRequest(`${REPORT_URL}/${env}/${EMessageType.DEBUG}`, EHttpMethod.POST, body);
 };
 
-export const query = (param: IQuery): Promise<ILogModel[] | IExceptionResponse> => {
+export const query = (param: IQuery): Promise<ILogModel[]> => {
   assertEqual(_initLock.flag, ELock.LOCKED, QUERY_ERR_MSG);
   const { env, appName } = _def;
   const params: IQueryBody = {
@@ -108,7 +108,7 @@ export const query = (param: IQuery): Promise<ILogModel[] | IExceptionResponse> 
   return httpRequest(`${QUERY_URL}`, EHttpMethod.GET, null, params);
 };
 
-export const queryAll = (): Promise<ILogModel[] | IExceptionResponse> => {
+export const queryAll = (): Promise<ILogModel[]> => {
   assertEqual(_initLock.flag, ELock.LOCKED, QUERY_ERR_MSG);
   return httpRequest(`${QUERY_URL}/all`, EHttpMethod.GET);
 };
