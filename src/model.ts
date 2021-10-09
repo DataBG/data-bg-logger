@@ -1,4 +1,3 @@
-// TODO: PORT 接口没有 TEST 对应的端口，所以应该去除 TEST
 export enum EEnv {
   PRE = 'PRE', // 预发环境 port 8081
   PROD = 'PROD', // 线上环境 port 8080
@@ -12,14 +11,14 @@ export enum EMessageType {
   DEBUG = 'DEBUG',
 }
 
-export abstract class ILogSubmitBody {
+export interface ILogSubmitBody {
   appName: string;
   userId?: number;
   namespace?: string;
   text: string;
 }
 
-export abstract class ILogModel {
+export interface ILogModel {
   id: number;
   appName: string;
   env: EEnv;
@@ -31,12 +30,12 @@ export abstract class ILogModel {
   lastModifiedTime: number;
 }
 
-export abstract class IDef {
+export interface IDef {
   appName: string;
   env: EEnv;
 }
 
-export abstract class IExceptionResponse {
+export interface IExceptionResponse {
   statusCode: number; // HttpStatus http状态码
   msg: string; // 异常信息
   detail: string; // 异常详细信息（可以是 JSON 序列化后结果）
@@ -49,7 +48,7 @@ export enum EHttpMethod {
   DELETE = 'DELETE',
 }
 
-export abstract class ILock {
+export interface ILock {
   flag: ELock;
 }
 
@@ -58,7 +57,7 @@ export enum ELock {
   UNLOCKED = 'UNLOCKED',
 }
 
-export abstract class IQueryBody {
+export interface IQueryBody {
   appName?: string;
   env?: EEnv;
   type?: EMessageType;
@@ -69,7 +68,7 @@ export abstract class IQueryBody {
   endTime?: number;
 }
 
-export abstract class IQuery {
+export interface IQuery {
   type?: EMessageType;
   userId?: number;
   namespace?: string;
