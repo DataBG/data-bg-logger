@@ -1,16 +1,4 @@
-import {
-  IDef,
-  EMessageType,
-  ILogSubmitBody,
-  EHttpMethod,
-  ILock,
-  ELock,
-  IQueryBody,
-  IQuery,
-  IExceptionResponse,
-  ILogModel,
-  EEnv,
-} from './model';
+import { EHttpMethod, ELock, EMessageType, IDef, ILock, ILogModel, ILogSubmitBody, IQuery, IQueryBody } from './model';
 import { updateBaseURL } from './api/instance';
 import { REPORT_URL, QUERY_URL } from './api/config';
 import { httpRequest } from './api/http';
@@ -124,16 +112,4 @@ export const Logger = {
   queryAll,
 };
 
-export {
-  IDef,
-  IExceptionResponse,
-  ILock,
-  ILogModel,
-  ILogSubmitBody,
-  IQuery,
-  IQueryBody,
-  EEnv,
-  EHttpMethod,
-  EMessageType,
-  ELock,
-};
+export * from './model';

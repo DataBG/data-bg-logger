@@ -1,7 +1,9 @@
-import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
+import axios, { AxiosError, AxiosInstance, AxiosRequestConfig } from 'axios';
 import { EEnv } from '../model';
 import { BASE_IP, PORT } from './config';
 import { debugConsole } from '../utils/debug';
+import { adaptAxiosError } from './errorHandler';
+import { IExceptionResponse } from '..';
 
 let config: AxiosRequestConfig = {
   withCredentials: true,
@@ -31,10 +33,15 @@ instance.interceptors.response.use(
     debugConsole(`[axios.response] ${config.url}`);
     return response;
   },
-  (err) => {
+  (err: AxiosError) => {
     debugConsole('interceptors.response.error');
-    // TODO: 经过异常链路时异常，应该是 status -> 改为 statusCode
-    return Promise.reject({ code: err.response.statusCode, ...err.response.data });
+    // TODO: clear console
+    // debugConsole('response', err.response);
+    // debugConsole('request', err.request);
+    const { status, data } = err.response;
+
+    const adpatedResponse: IExceptionResponse = adaptAxiosError(status, data);
+    return Promise.reject(adpatedResponse);
   }
 );
 
