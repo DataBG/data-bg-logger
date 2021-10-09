@@ -1,4 +1,3 @@
-// TODO: PORT 接口没有 TEST 对应的端口，所以应该去除 TEST
 export enum EEnv {
   PRE = 'PRE', // 预发环境 port 8081
   PROD = 'PROD', // 线上环境 port 8080
@@ -36,7 +35,7 @@ export abstract class IDef {
   env: EEnv;
 }
 
-export abstract class IExceptionResponse {
+export interface IExceptionResponse {
   statusCode: number; // HttpStatus http状态码
   msg: string; // 异常信息
   detail: string; // 异常详细信息（可以是 JSON 序列化后结果）

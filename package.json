@@ -14,6 +14,7 @@
   ],
   "scripts": {
     "test": "jest",
+    "test:debug": "DEBUG=DEBUG jest",
     "build": "rm -rf lib/* && babel src/ -d lib/ -x .ts && tsc",
     "debug": "DEBUG=DEBUG babel-node src/debug/index -x .ts"
   },

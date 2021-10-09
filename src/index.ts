@@ -1,16 +1,4 @@
-import {
-  IDef,
-  EMessageType,
-  ILogSubmitBody,
-  EHttpMethod,
-  ILock,
-  ELock,
-  IQueryBody,
-  IQuery,
-  IExceptionResponse,
-  ILogModel,
-  EEnv,
-} from './model';
+import { EHttpMethod, ELock, EMessageType, IDef, ILock, ILogModel, ILogSubmitBody, IQuery, IQueryBody } from './model';
 import { updateBaseURL } from './api/instance';
 import { REPORT_URL, QUERY_URL } from './api/config';
 import { httpRequest } from './api/http';
@@ -41,7 +29,6 @@ export const destroy = (): void => {
   lock(_initLock);
 };
 
-// TODO: Promise<T> T 应该是正常返回的数据类型，也就是 then 方法的参数；抛出异常时的 err 的类型需要透过其他方式声明
 export const log = (text: string, namespace?: string): Promise<ILogModel> => {
   assertEqual(_initLock.flag, ELock.LOCKED, LOG_ERR_MSG);
   const { env, appName } = _def;
@@ -125,20 +112,4 @@ export const Logger = {
   queryAll,
 };
 
-// TODO: 这里应该还要在额外导出 model 相关的类型定义，否则使用方没法用
-export const EModel = {
-  EEnv,
-  EHttpMethod,
-  ELock,
-  EMessageType,
-};
-
-export const IModel = {
-  IDef,
-  IExceptionResponse,
-  ILock,
-  ILogModel,
-  ILogSubmitBody,
-  IQuery,
-  IQueryBody,
-};
+export * from './model';
