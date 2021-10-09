@@ -1,4 +1,4 @@
-import { EMessageType, ILogModel } from '../model';
+import { EMessageType, ILogModel, IExceptionResponse } from '../model';
 import { LoggerTest, logger_def } from './constant/logger';
 import { QueryTest, query_def } from './constant/query';
 
@@ -7,6 +7,7 @@ declare global {
     interface Matchers<R> {
       toBeValidLog(msgType: EMessageType): R;
       toBeValidQuery(): R;
+      toBeValidError(expectCode: number): R;
     }
   }
 }
@@ -45,6 +46,25 @@ expect.extend({
     return {
       pass,
       message: () => `Query api passed!`,
+    };
+  },
+  toBeValidError(received: IExceptionResponse, expectCode: number) {
+    const { statusCode, msg, detail } = received;
+    const codeCheck = statusCode === expectCode;
+    const msgCheck = msg !== null;
+    const detailCheck = detail !== null;
+    const pass = codeCheck && msgCheck && detailCheck;
+
+    return {
+      pass,
+      message: () =>
+        `${
+          pass
+            ? 'Error matched!'
+            : `Error not matched : ${!codeCheck && `Expect statusCode ${expectCode}, `} ${
+                !msgCheck && `Expect msg ${msg}, `
+              } ${!detailCheck && `Expect detail ${detail}`}!`
+        }`,
     };
   },
 });
