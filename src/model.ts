@@ -1,6 +1,5 @@
 export enum EEnv {
-  TEST = 'TEST', // 测试环境
-  PRE = 'PRE', // 预发环境 port8081
+  PRE = 'PRE', // 预发环境 port 8081
   PROD = 'PROD', // 线上环境 port 8080
 }
 
@@ -12,14 +11,14 @@ export enum EMessageType {
   DEBUG = 'DEBUG',
 }
 
-export interface ILogSubmitBody {
+export abstract class ILogSubmitBody {
   appName: string;
   userId?: number;
   namespace?: string;
   text: string;
 }
 
-export interface ILogModel {
+export abstract class ILogModel {
   id: number;
   appName: string;
   env: EEnv;
@@ -31,12 +30,12 @@ export interface ILogModel {
   lastModifiedTime: number;
 }
 
-export interface IDef {
+export abstract class IDef {
   appName: string;
   env: EEnv;
 }
 
-export interface IExceptionResponse {
+export abstract class IExceptionResponse {
   statusCode: number; // HttpStatus http状态码
   msg: string; // 异常信息
   detail: string; // 异常详细信息（可以是 JSON 序列化后结果）
@@ -49,7 +48,7 @@ export enum EHttpMethod {
   DELETE = 'DELETE',
 }
 
-export interface ILock {
+export abstract class ILock {
   flag: ELock;
 }
 
@@ -58,7 +57,7 @@ export enum ELock {
   UNLOCKED = 'UNLOCKED',
 }
 
-export interface IQueryBody {
+export abstract class IQueryBody {
   appName?: string;
   env?: EEnv;
   type?: EMessageType;
@@ -69,7 +68,7 @@ export interface IQueryBody {
   endTime?: number;
 }
 
-export interface IQuery {
+export abstract class IQuery {
   type?: EMessageType;
   userId?: number;
   namespace?: string;

@@ -1,6 +1,5 @@
 import {
   IDef,
-  EEnv,
   EMessageType,
   ILogSubmitBody,
   EHttpMethod,
@@ -10,6 +9,7 @@ import {
   IQuery,
   IExceptionResponse,
   ILogModel,
+  EEnv,
 } from './model';
 import { updateBaseURL } from './api/instance';
 import { REPORT_URL, QUERY_URL } from './api/config';
@@ -96,7 +96,7 @@ export const debug = (text: string, namespace?: string): Promise<ILogModel | IEx
   return httpRequest(`${REPORT_URL}/${env}/${EMessageType.DEBUG}`, EHttpMethod.POST, body);
 };
 
-export const query = (param: IQuery): Promise<ILogModel | IExceptionResponse> => {
+export const query = (param: IQuery): Promise<ILogModel[] | IExceptionResponse> => {
   assertEqual(_initLock.flag, ELock.LOCKED, QUERY_ERR_MSG);
   const { env, appName } = _def;
   const params: IQueryBody = {
@@ -107,7 +107,7 @@ export const query = (param: IQuery): Promise<ILogModel | IExceptionResponse> =>
   return httpRequest(`${QUERY_URL}`, EHttpMethod.GET, null, params);
 };
 
-export const queryAll = (): Promise<ILogModel | IExceptionResponse> => {
+export const queryAll = (): Promise<ILogModel[] | IExceptionResponse> => {
   assertEqual(_initLock.flag, ELock.LOCKED, QUERY_ERR_MSG);
   return httpRequest(`${QUERY_URL}/all`, EHttpMethod.GET);
 };
@@ -122,4 +122,21 @@ export const Logger = {
   debug,
   query,
   queryAll,
+};
+
+export const EModel = {
+  EEnv,
+  EHttpMethod,
+  ELock,
+  EMessageType,
+};
+
+export const IModel = {
+  IDef,
+  IExceptionResponse,
+  ILock,
+  ILogModel,
+  ILogSubmitBody,
+  IQuery,
+  IQueryBody,
 };
