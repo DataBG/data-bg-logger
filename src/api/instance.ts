@@ -33,7 +33,8 @@ instance.interceptors.response.use(
   },
   (err) => {
     debugConsole('interceptors.response.error');
-    return Promise.reject({ code: err.response.status, ...err.response.data });
+    // TODO: 经过异常链路时异常，应该是 status -> 改为 statusCode
+    return Promise.reject({ code: err.response.statusCode, ...err.response.data });
   }
 );
 

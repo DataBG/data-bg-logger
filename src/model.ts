@@ -1,3 +1,4 @@
+// TODO: PORT 接口没有 TEST 对应的端口，所以应该去除 TEST
 export enum EEnv {
   PRE = 'PRE', // 预发环境 port 8081
   PROD = 'PROD', // 线上环境 port 8080
