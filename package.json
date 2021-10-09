@@ -1,6 +1,6 @@
 {
   "name": "@data-bg/logger",
-  "version": "0.1.2-alpha.1",
+  "version": "1.0.0",
   "description": "SDK provided for front end, including utilities of logging related functions.",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -16,7 +16,8 @@
     "test": "jest",
     "test:debug": "DEBUG=DEBUG jest",
     "build": "rm -rf lib/* && babel src/ -d lib/ -x .ts && tsc",
-    "debug": "DEBUG=DEBUG babel-node src/debug/index -x .ts"
+    "debug": "DEBUG=DEBUG babel-node src/debug/index -x .ts",
+    "reinstall": "rm -rf node_modules && yarn"
   },
   "devDependencies": {
     "@babel/cli": "^7.15.7",
