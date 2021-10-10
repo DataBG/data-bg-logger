@@ -4,7 +4,7 @@
   "description": "SDK provided for front end, including utilities of logging related functions.",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
-  "repository": "https://github.com/DataBG/youxian-logger.git",
+  "repository": "https://github.com/DataBG/data-bg-logger.git",
   "author": "cclintris",
   "license": "MIT",
   "private": false,
